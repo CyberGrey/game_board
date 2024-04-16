@@ -1,26 +1,31 @@
 import pygame, sys
 
-pygame.init()
-
-
 width, height = 40, 40
 distance = 10
-briсk = 15
+briсk = 25
 
 size = ((width+distance)*briсk+distance, (height+distance)*briсk+distance)
 
 red = (255, 0, 0)
 white = (255, 255, 255)
-
-screen = pygame.display.set_mode(size)
-pygame.display.set_caption("Game field")
-
-
+blue = (0, 0, 255)
 board = [[0]*briсk for i in range(briсk)]
 
-while True:
-    for event in pygame.event.get():
+pygame.init()
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption("Pixel paint")
+icon = pygame.image.load('image/icon.png')
+pygame.display.set_icon(icon)
+
+running = True
+while running:
+
+    #screen.fill(blue)
+    pygame.display.update()
+
+    for event in pygame.event.get():        
         if event.type == pygame.QUIT:
+            running = False
             pygame.quit()
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -39,4 +44,3 @@ while True:
             x = distance + col*(width+distance)
             y = distance + row*(height+distance)
             pygame.draw.rect(screen, color, (x, y, width, height))
-    pygame.display.update()
